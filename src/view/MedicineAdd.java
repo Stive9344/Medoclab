@@ -30,6 +30,8 @@ public class MedicineAdd extends JDialog implements MyView{
 	private static JTextField txtNom;
 	private static JComboBox<String> cbxFormes;
 	private static JTextField txtBrevet;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Méthode statique permettant de réinitialiser les champs
@@ -78,7 +80,7 @@ public class MedicineAdd extends JDialog implements MyView{
 	public MedicineAdd(String[] forms) {
 		setTitle("M\u00E9dicament - Ajouter");
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 423);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -99,7 +101,7 @@ public class MedicineAdd extends JDialog implements MyView{
 		lblForme.setBounds(63, 128, 70, 14);
 		contentPanel.add(lblForme);
 		
-		cbxFormes = new JComboBox<String>(forms);
+		cbxFormes = new JComboBox<String>(/*forms*/);
 		cbxFormes.setBounds(140, 125, 192, 20);
 		contentPanel.add(cbxFormes);
 		
@@ -112,6 +114,45 @@ public class MedicineAdd extends JDialog implements MyView{
 		txtBrevet.setBounds(140, 84, 192, 20);
 		contentPanel.add(txtBrevet);
 		txtBrevet.setColumns(10);
+		
+		JLabel lblAdministration = new JLabel("Administration : ");
+		lblAdministration.setBounds(63, 159, 89, 14);
+		contentPanel.add(lblAdministration);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(140, 156, 192, 20);
+		contentPanel.add(comboBox);
+		
+		JLabel lblEffetsIndsirables = new JLabel("Effets ind\u00E9sirables :");
+		lblEffetsIndsirables.setBounds(38, 197, 95, 14);
+		contentPanel.add(lblEffetsIndsirables);
+		
+		textField = new JTextField();
+		textField.setBounds(140, 194, 192, 20);
+		contentPanel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblComposition = new JLabel("Composition : ");
+		lblComposition.setBounds(63, 239, 70, 14);
+		contentPanel.add(lblComposition);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setToolTipText("");
+		comboBox_1.setBounds(140, 236, 50, 20);
+		contentPanel.add(comboBox_1);
+		
+		JLabel lblPrincipeActif = new JLabel("Principe actif : ");
+		lblPrincipeActif.setBounds(53, 280, 80, 14);
+		contentPanel.add(lblPrincipeActif);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(140, 277, 197, 20);
+		contentPanel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblExcipients = new JLabel("Excipient(s)");
+		lblExcipients.setBounds(200, 239, 70, 14);
+		contentPanel.add(lblExcipients);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
