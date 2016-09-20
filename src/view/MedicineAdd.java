@@ -116,7 +116,7 @@ public class MedicineAdd extends JDialog implements MyView{
 		txtBrevet.setColumns(10);
 		
 		JLabel lblAdministration = new JLabel("Administration : ");
-		lblAdministration.setBounds(63, 159, 89, 14);
+		lblAdministration.setBounds(42, 159, 114, 14);
 		contentPanel.add(lblAdministration);
 		
 		JComboBox comboBox = new JComboBox();
@@ -124,7 +124,7 @@ public class MedicineAdd extends JDialog implements MyView{
 		contentPanel.add(comboBox);
 		
 		JLabel lblEffetsIndsirables = new JLabel("Effets ind\u00E9sirables :");
-		lblEffetsIndsirables.setBounds(38, 197, 95, 14);
+		lblEffetsIndsirables.setBounds(12, 197, 121, 14);
 		contentPanel.add(lblEffetsIndsirables);
 		
 		textField = new JTextField();
@@ -133,16 +133,16 @@ public class MedicineAdd extends JDialog implements MyView{
 		textField.setColumns(10);
 		
 		JLabel lblComposition = new JLabel("Composition : ");
-		lblComposition.setBounds(63, 239, 70, 14);
+		lblComposition.setBounds(53, 239, 91, 14);
 		contentPanel.add(lblComposition);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setToolTipText("");
+		comboBox_1.setToolTipText("1");
 		comboBox_1.setBounds(140, 236, 50, 20);
 		contentPanel.add(comboBox_1);
 		
 		JLabel lblPrincipeActif = new JLabel("Principe actif : ");
-		lblPrincipeActif.setBounds(53, 280, 80, 14);
+		lblPrincipeActif.setBounds(53, 280, 91, 14);
 		contentPanel.add(lblPrincipeActif);
 		
 		textField_1 = new JTextField();
