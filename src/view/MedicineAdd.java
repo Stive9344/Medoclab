@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 /**
  * Classe définissant la vue d'ajout d'un médicament
@@ -102,6 +103,7 @@ public class MedicineAdd extends JDialog implements MyView{
 		contentPanel.add(lblForme);
 		
 		cbxFormes = new JComboBox<String>(/*forms*/);
+		cbxFormes.setEditable(true);
 		cbxFormes.setBounds(140, 125, 192, 20);
 		contentPanel.add(cbxFormes);
 		
@@ -120,6 +122,8 @@ public class MedicineAdd extends JDialog implements MyView{
 		contentPanel.add(lblAdministration);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setBackground(Color.WHITE);
 		comboBox.setBounds(140, 156, 192, 20);
 		contentPanel.add(comboBox);
 		
@@ -137,6 +141,7 @@ public class MedicineAdd extends JDialog implements MyView{
 		contentPanel.add(lblComposition);
 		
 		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setEditable(true);
 		comboBox_1.setToolTipText("1");
 		comboBox_1.setBounds(140, 236, 50, 20);
 		contentPanel.add(comboBox_1);
