@@ -45,6 +45,7 @@ public class MedicineChange extends JDialog implements MyView{
 	public static String getTxtForm(){
 		return (String) cbxFormes.getSelectedItem();
 	}
+	
 	public static String getTxtMode(){
 		return (String) cbxModes.getSelectedItem();
 	}
@@ -63,7 +64,7 @@ public class MedicineChange extends JDialog implements MyView{
 	 * @param forms les formes à intégrer dans la liste déroulante
 	 * @param medicine le détail du médicament à modifier
 	 */
-	public MedicineChange(String[] forms, String[] medicine) {
+	public MedicineChange(String[] forms, String[] modes, String[] medicine) {
 		setTitle("M\u00E9dicament - Modifier");
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -109,9 +110,10 @@ public class MedicineChange extends JDialog implements MyView{
 		lblMode.setBounds(83, 169, 56, 16);
 		contentPanel.add(lblMode);
 		
-		cbxModes = new JComboBox();
+		cbxModes = new JComboBox<String>(modes);
 		cbxModes.setBounds(140, 166, 192, 22);
 		contentPanel.add(cbxModes);
+		cbxFormes.setSelectedItem(medicine[3]);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
