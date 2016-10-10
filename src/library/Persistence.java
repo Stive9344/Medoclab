@@ -56,6 +56,21 @@ public abstract class Persistence {
 			Persistence.closeConnection(cn);
 		}
 	}
+	
+	public static void insertMode(String name) throws SQLException{
+		Connection cn = Persistence.connection();
+		Statement stmt;
+		
+		try {
+			 stmt = cn.createStatement();
+			stmt.executeUpdate("INSERT INTO forme (nom) VALUES ('"+name+"')");
+		} catch (SQLException e) {
+			throw e;
+		}
+		finally{
+			Persistence.closeConnection(cn);
+		}
+	}
 
 	/**
 	 * Méthode de SELECT des tables
@@ -117,16 +132,16 @@ public abstract class Persistence {
 	 * @throws SQLException l'exception SQL levée
 	 */
 	private static Connection connection() throws SQLException{
-		String host = "192.168.222.72";
-//		String host = "127.0.0.1:3306";
+	//	String host = "192.168.222.72";
+		String host = "127.0.0.1:3306";
 		String base = "bdMedocLab";
 		String user = "antoineZ";
 		String passwd = "zouzou";
 		Connection conn = null;
 		try
 		{
-			String connectionString ="jdbc:sqlserver://"+host+";database="+base+";user="+user+";password="+passwd;
-//			String connectionString ="jdbc:mysql://"+host+"/"+base+"?user="+user+"&password="+passwd;
+//			String connectionString ="jdbc:sqlserver://"+host+";database="+base+";user="+user+";password="+passwd;
+			String connectionString ="jdbc:mysql://"+host+"/"+base+"?user="+user+"&password="+passwd;
 			conn = DriverManager.getConnection(connectionString);
 		}
 		catch (SQLException e) 
