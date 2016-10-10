@@ -199,7 +199,7 @@ public class Ctrl implements ActionListener, MouseListener{
 	 */
 	private String[][] medicinesTable() {
 		int i=0;
-		String[][] liste=new String[Medicine.allTheMedicines.size()][3];
+		String[][] liste=new String[Medicine.allTheMedicines.size()][4];
 		for(Medicine m : Medicine.allTheMedicines){
 			liste[i][0]=m.getName();
 			liste[i][1]=m.getItsForm().getName();
@@ -247,7 +247,7 @@ public class Ctrl implements ActionListener, MouseListener{
 			//Récupération du médicament à partir de ces informations
 			Medicine med = Medicine.getMedicineByName(laTable.getValueAt(row,0).toString());
 			//Création d'un tableau contenant le détail du médicament
-			String[] data = new String[3];
+			String[] data = new String[4];
 			data[0]=med.getName();
 			data[1]=med.getItsForm().getName();
 			data[3]=med.getItsMode().getName();
