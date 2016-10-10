@@ -105,7 +105,7 @@ public class Ctrl implements ActionListener, MouseListener{
 			switch(what){
 			case "ajout":
 				//Création de la vue d'ajout d'un médicament
-				MedicineAdd frame = new MedicineAdd(this.formsBox());
+				MedicineAdd frame = new MedicineAdd(this.formsBox(),this.modesBox());
 				//Assignation d'un observateur sur cette vue
 				frame.assignListener(this);
 				//Affichage de la vue
@@ -208,8 +208,8 @@ public class Ctrl implements ActionListener, MouseListener{
 		for(Medicine m : Medicine.allTheMedicines){
 			liste[i][0]=m.getName();
 			liste[i][1]=m.getItsForm().getName();
-			liste[i][3]=m.getItsMode().getName();
-			liste[i][2]=DatesConverter.dateToStringFR(m.getPatentDate());
+			liste[i][2]=m.getItsMode().getName();
+			liste[i][3]=DatesConverter.dateToStringFR(m.getPatentDate());
 			i++;
 		}
 		return liste;
@@ -255,8 +255,9 @@ public class Ctrl implements ActionListener, MouseListener{
 			String[] data = new String[4];
 			data[0]=med.getName();
 			data[1]=med.getItsForm().getName();
-			data[3]=med.getItsMode().getName();
-			data[2]=DatesConverter.dateToStringFR(med.getPatentDate());
+			data[2]=med.getItsMode().getName();
+			data[3]=DatesConverter.dateToStringFR(med.getPatentDate());
+			
 			//Création de la vue de modification du médicament sélectionné dans la jtable
 			MedicineChange frame = new MedicineChange(this.formsBox(),this.modesBox(),data);
 			//Assignation d'un observateur sur cette vue
