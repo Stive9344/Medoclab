@@ -131,7 +131,7 @@ public class Ctrl implements ActionListener, MouseListener{
 					String nomF = MedicineAdd.getTxtForm();
 					String nomM = MedicineAdd.getTxtMode();
 					Form forme = Form.getFormByName(nomF);
-					Mode mode = Mode.getFormByName(nomM);
+					Mode mode = Mode.getModeByName(nomM);
 					String dateB = MedicineAdd.getTxtPatentDate();
 					//Création du nouvel objet Medicine
 					Medicine med = new Medicine(nom,forme,mode,DatesConverter.FRStringToDate(dateB));
@@ -164,7 +164,7 @@ public class Ctrl implements ActionListener, MouseListener{
 				String nomF = MedicineChange.getTxtForm();
 				String nomM = MedicineChange.getTxtMode();
 				Form forme = Form.getFormByName(nomF);
-				Mode mode = Mode.getFormByName(nomM);
+				Mode mode = Mode.getModeByName(nomM);
 				String dateB = MedicineChange.getTxtPatentDate();
 				//Récupération de l'objet Medicine à modifier
 				Medicine med = Medicine.getMedicineByName(nom);
