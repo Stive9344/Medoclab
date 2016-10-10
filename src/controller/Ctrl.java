@@ -51,7 +51,7 @@ public class Ctrl implements ActionListener, MouseListener{
 			JOptionPane.showMessageDialog(null,message,"Erreur SQL",JOptionPane.ERROR_MESSAGE);
 		}
 		for(int i=0;i<dataMode.length;i++){
-			new Form(Integer.parseInt(dataMode[i][0]),dataMode[i][1]);
+			new Mode(Integer.parseInt(dataMode[i][0]),dataMode[i][1]);
 		}
 		
 		//Création des objets Medicine
@@ -62,8 +62,13 @@ public class Ctrl implements ActionListener, MouseListener{
 			String message = "Erreur lors de l'echange avec la base de données. L'application a rencontrée l'erreur : "+e.getMessage();
 			JOptionPane.showMessageDialog(null,message,"Erreur SQL",JOptionPane.ERROR_MESSAGE);
 		}
+		
+		
 		for(int i=0;i<dataMed.length;i++){
-			new Medicine(dataMed[i][1],Form.getFormById(Integer.parseInt(dataMed[i][5])),Mode.getModeById(Integer.parseInt(dataMed[i][5])),DatesConverter.USStringToDate(dataMed[i][2]));
+			new Medicine(dataMed[i][1],
+					Form.getFormById(Integer.parseInt(dataMed[i][5])),
+					Mode.getModeById(Integer.parseInt(dataMed[i][5])),
+					DatesConverter.USStringToDate(dataMed[i][2]));
 		}
 	}
 

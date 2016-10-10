@@ -27,9 +27,9 @@ public abstract class Persistence {
 		try{
 			 stmt = cn.createStatement();
 			 if(patentDate!=null)
-				 stmt.executeUpdate("INSERT INTO medicament (nom,idForme,dateBrevet) VALUES ('"+name+"',"+idForm+","+idMode+",'"+DatesConverter.dateToStringFR(patentDate)+"')");
+				 stmt.executeUpdate("INSERT INTO medicament (nom,idForme,idMode,dateBrevet) VALUES ('"+name+"',"+idForm+","+idMode+",'"+DatesConverter.dateToStringFR(patentDate)+"')");
 			 else
-				 stmt.executeUpdate("INSERT INTO medicament (nom,idForme,dateBrevet) VALUES ('"+name+"',"+idForm+","+idMode+",null)");
+				 stmt.executeUpdate("INSERT INTO medicament (nom,idForme,idMode,dateBrevet) VALUES ('"+name+"',"+idForm+","+idMode+",null)");
 		}catch (SQLException e){
 			throw e;
 		}
@@ -63,7 +63,7 @@ public abstract class Persistence {
 		
 		try {
 			 stmt = cn.createStatement();
-			stmt.executeUpdate("INSERT INTO forme (nom) VALUES ('"+name+"')");
+			stmt.executeUpdate("INSERT INTO mode (Nom) VALUES ('"+name+"')");
 		} catch (SQLException e) {
 			throw e;
 		}
@@ -178,6 +178,7 @@ public abstract class Persistence {
 		try{
 			 stmt = cn.createStatement();
 			 stmt.executeUpdate("UPDATE medicament SET idForme="+idForm+" WHERE nom='"+name+"'");
+			 stmt.executeUpdate("UPDATE medicament SET idMode="+idMode+" WHERE Nom='"+name+"'");
 			 if(patentDate!=null)
 				 stmt.executeUpdate("UPDATE medicament SET dateBrevet='"+DatesConverter.dateToStringFR(patentDate)+"' WHERE nom='"+name+"'");			 
 		}catch (SQLException e){
