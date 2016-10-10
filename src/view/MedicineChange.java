@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.JList;
 /**
  * Classe définissant la vue de modification d'un médicament
  * @author xavier
@@ -28,6 +29,7 @@ public class MedicineChange extends JDialog implements MyView{
 	public static JButton btnAnnuler;
 	private static JTextField txtNom;
 	private static JComboBox<String> cbxFormes;
+	private static JComboBox<String> cbxModes;
 	private static JTextField txtBrevet;
 	/**
 	 * Méthode statique permettant d'obtenir le contenu du champ texte nom
@@ -42,6 +44,9 @@ public class MedicineChange extends JDialog implements MyView{
 	 */
 	public static String getTxtForm(){
 		return (String) cbxFormes.getSelectedItem();
+	}
+	public static String getTxtMode(){
+		return (String) cbxModes.getSelectedItem();
 	}
 	/**
 	 * Méthode statique permettant d'obtenir le contenu du champ texte date brevet
@@ -99,6 +104,14 @@ public class MedicineChange extends JDialog implements MyView{
 		contentPanel.add(txtBrevet);
 		txtBrevet.setColumns(10);
 		txtBrevet.setText(medicine[2]);
+		
+		JLabel lblMode = new JLabel("Mode :");
+		lblMode.setBounds(83, 169, 56, 16);
+		contentPanel.add(lblMode);
+		
+		cbxModes = new JComboBox();
+		cbxModes.setBounds(140, 166, 192, 22);
+		contentPanel.add(cbxModes);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

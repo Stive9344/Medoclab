@@ -19,6 +19,8 @@ public class Medicine {
 	/**
 	 * Date d'obtention du brevet pharmaceutique
 	 */
+	private Mode itsMode;
+	
 	private GregorianCalendar patentDate;
 	/**
 	 * Liste statique de tous les médicaments
@@ -31,10 +33,11 @@ public class Medicine {
 	 * @param itsForm forme pharmaceutique du nouveau médicament
 	 * @param patentDate date d'obtention du brevet du nouveau médicament
 	 */
-	public Medicine(String name, Form itsForm, GregorianCalendar patentDate) {
+	public Medicine(String name, Form itsForm, Mode itsMode, GregorianCalendar patentDate) {
 		super();
 		this.name = name;
 		this.itsForm = itsForm;
+		this.itsMode = itsMode;
 		this.patentDate = patentDate;
 		allTheMedicines.add(this);
 	}
@@ -53,6 +56,9 @@ public class Medicine {
 	 */
 	public Form getItsForm() {
 		return itsForm;
+	}
+	public Mode getItsMode() {
+		return itsMode;
 	}
 
 	/**
@@ -84,6 +90,9 @@ public class Medicine {
 	 */
 	public void setItsForm(Form itsForm) {
 		this.itsForm = itsForm;
+	}
+	public void setItsMode(Mode itsMode) {
+		this.itsMode = itsMode;
 	}
 
 	/**

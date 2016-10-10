@@ -13,6 +13,7 @@ import library.DatesConverter;
 import library.Persistence;
 import model.Form;
 import model.Medicine;
+import model.Mode;
 import view.MedicineAdd;
 import view.MedicineChange;
 import view.MedicineHome;
@@ -40,6 +41,19 @@ public class Ctrl implements ActionListener, MouseListener{
 		for(int i=0;i<dataForm.length;i++){
 			new Form(Integer.parseInt(dataForm[i][0]),dataForm[i][1]);
 		}
+		
+		//Création des objets Mode
+		String[][] dataMode = null;
+		try {
+			dataMode = Persistence.load("mode");
+		} catch (SQLException e) {
+			String message = "Erreur lors de l'echange avec la base de données. L'application a rencontrée l'erreur : "+e.getMessage();
+			JOptionPane.showMessageDialog(null,message,"Erreur SQL",JOptionPane.ERROR_MESSAGE);
+		}
+		for(int i=0;i<dataMode.length;i++){
+			new Form(Integer.parseInt(dataMode[i][0]),dataMode[i][1]);
+		}
+		
 		//Création des objets Medicine
 		String[][] dataMed = null;
 		try {
@@ -49,7 +63,7 @@ public class Ctrl implements ActionListener, MouseListener{
 			JOptionPane.showMessageDialog(null,message,"Erreur SQL",JOptionPane.ERROR_MESSAGE);
 		}
 		for(int i=0;i<dataMed.length;i++){
-			new Medicine(dataMed[i][1],Form.getFormById(Integer.parseInt(dataMed[i][5])),DatesConverter.USStringToDate(dataMed[i][2]));
+			new Medicine(dataMed[i][1],Form.getFormById(Integer.parseInt(dataMed[i][5])),Mode.getModeById(Integer.parseInt(dataMed[i][5])),DatesConverter.USStringToDate(dataMed[i][2]));
 		}
 	}
 
@@ -94,7 +108,7 @@ public class Ctrl implements ActionListener, MouseListener{
 				break;
 			case "rechercherModifier":				
 				String[][] dataTable = this.medicinesTable();
-				String[] dataColumns = {"Nom","Forme","Brevet"};
+				String[] dataColumns = {"Nom","Forme","Mode","Brevet"};
 				//Création de la vue de recherche d'un médicament
 				MedicineSearch frame1 = new MedicineSearch(dataTable,dataColumns);
 				//Assignation d'un observateur sur cette vue
@@ -115,13 +129,15 @@ public class Ctrl implements ActionListener, MouseListener{
 				}
 				else{
 					String nomF = MedicineAdd.getTxtForm();
+					String nomM = MedicineAdd.getTxtMode();
 					Form forme = Form.getFormByName(nomF);
+					Mode mode = Mode.getFormByName(nomM);
 					String dateB = MedicineAdd.getTxtPatentDate();
 					//Création du nouvel objet Medicine
-					Medicine med = new Medicine(nom,forme,DatesConverter.FRStringToDate(dateB));
+					Medicine med = new Medicine(nom,forme,mode,DatesConverter.FRStringToDate(dateB));
 					//INSERT dans la BD
 					try {
-						Persistence.insertMedicine(med.getName(),med.getItsForm().getId(),med.getPatentDate());
+						Persistence.insertMedicine(med.getName(),med.getItsForm().getId(),med.getItsMode().getId(),med.getPatentDate());
 						//Message de confirmation pour l'utilisateur
 						JOptionPane.showMessageDialog(null,"Le médicament a bien été ajouté","Confirmation Enregistrement",JOptionPane.INFORMATION_MESSAGE);
 						//Réinitialisation des champs
@@ -146,19 +162,22 @@ public class Ctrl implements ActionListener, MouseListener{
 				//Récupération des informations saisies par l'utilisateur
 				String nom = MedicineChange.getTxtName();
 				String nomF = MedicineChange.getTxtForm();
+				String nomM = MedicineChange.getTxtMode();
 				Form forme = Form.getFormByName(nomF);
+				Mode mode = Mode.getFormByName(nomM);
 				String dateB = MedicineChange.getTxtPatentDate();
 				//Récupération de l'objet Medicine à modifier
 				Medicine med = Medicine.getMedicineByName(nom);
 				//Modification de celui-ci à travers les setteurs
 				med.setItsForm(forme);
+				med.setItsMode(mode);
 				med.setPatentDate(DatesConverter.FRStringToDate(dateB));
 				//UPDATE dans la BD
 				try {
-					Persistence.updateMedicine(med.getName(),med.getItsForm().getId(),med.getPatentDate());
+					Persistence.updateMedicine(med.getName(),med.getItsForm().getId(),med.getItsMode().getId(),med.getPatentDate());
 					//Mise à jour de la jtable
 					String[][] dataTable = this.medicinesTable();
-					String[] dataColumns = {"Nom","Forme","Brevet"};
+					String[] dataColumns = {"Nom","Forme","Mode","Brevet"};
 					MedicineSearch.setTable(dataTable, dataColumns);
 					//Modification du bouton (annuler devient fermer)
 					MedicineChange.btnAnnuler.setText("Fermer");
@@ -184,6 +203,7 @@ public class Ctrl implements ActionListener, MouseListener{
 		for(Medicine m : Medicine.allTheMedicines){
 			liste[i][0]=m.getName();
 			liste[i][1]=m.getItsForm().getName();
+			liste[i][3]=m.getItsMode().getName();
 			liste[i][2]=DatesConverter.dateToStringFR(m.getPatentDate());
 			i++;
 		}
@@ -198,6 +218,15 @@ public class Ctrl implements ActionListener, MouseListener{
 		int i=0;
 		String[] liste=new String[Form.allTheForms.size()];
 		for(Form l : Form.allTheForms){
+			liste[i]=l.getName();
+			i++;
+		}
+		return liste;
+	}
+	private String[] modesBox(){
+		int i=0;
+		String[] liste=new String[Mode.allTheModes.size()];
+		for(Mode l : Mode.allTheModes){
 			liste[i]=l.getName();
 			i++;
 		}
@@ -221,13 +250,17 @@ public class Ctrl implements ActionListener, MouseListener{
 			String[] data = new String[3];
 			data[0]=med.getName();
 			data[1]=med.getItsForm().getName();
+			data[3]=med.getItsMode().getName();
 			data[2]=DatesConverter.dateToStringFR(med.getPatentDate());
 			//Création de la vue de modification du médicament sélectionné dans la jtable
 			MedicineChange frame = new MedicineChange(this.formsBox(),data);
+			MedicineChange frame1 = new MedicineChange(this.modesBox(),data);
 			//Assignation d'un observateur sur cette vue
 			frame.assignListener(this);
+			frame1.assignListener(this);
 			//Affichage de la vue
 			frame.setVisible(true);
+			frame1.setVisible(true);
 		 } 
 	}
 

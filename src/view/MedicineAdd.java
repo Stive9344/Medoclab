@@ -30,6 +30,7 @@ public class MedicineAdd extends JDialog implements MyView{
 	private JButton btnAnnuler;
 	private static JTextField txtNom;
 	private static JComboBox<String> cbxFormes;
+	private static JComboBox<String> cbxModes;
 	private static JTextField txtBrevet;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -56,6 +57,9 @@ public class MedicineAdd extends JDialog implements MyView{
 	 */
 	public static String getTxtForm(){
 		return (String) cbxFormes.getSelectedItem();
+	}
+	public static String getTxtMode(){
+		return (String) cbxModes.getSelectedItem();
 	}
 	
 	/**
@@ -102,7 +106,7 @@ public class MedicineAdd extends JDialog implements MyView{
 		lblForme.setBounds(63, 128, 70, 14);
 		contentPanel.add(lblForme);
 		
-		cbxFormes = new JComboBox<String>(/*forms*/);
+		cbxFormes = new JComboBox<String>(forms);
 		cbxFormes.setEditable(true);
 		cbxFormes.setBounds(140, 125, 192, 20);
 		contentPanel.add(cbxFormes);
@@ -121,11 +125,11 @@ public class MedicineAdd extends JDialog implements MyView{
 		lblAdministration.setBounds(42, 159, 114, 14);
 		contentPanel.add(lblAdministration);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
-		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(140, 156, 192, 20);
-		contentPanel.add(comboBox);
+		cbxModes = new JComboBox();
+		cbxModes.setEditable(true);
+		cbxModes.setBackground(Color.WHITE);
+		cbxModes.setBounds(140, 156, 192, 20);
+		contentPanel.add(cbxModes);
 		
 		JLabel lblEffetsIndsirables = new JLabel("Effets ind\u00E9sirables :");
 		lblEffetsIndsirables.setBounds(12, 197, 121, 14);
